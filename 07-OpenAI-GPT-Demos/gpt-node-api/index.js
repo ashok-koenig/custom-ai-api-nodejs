@@ -11,6 +11,8 @@ app.use(express.json())
 
 app.post("/chat", (req, res)=>{
     const prompt = req.body.prompt;
+    const tone = req.body.tone || "You are a helpful assisttant."
+    const temperature = req.body.temperature || 0.7
 
     if(!prompt){
         return res.status(400).json({error: "Prompt is required"})
@@ -21,9 +23,10 @@ app.post("/chat", (req, res)=>{
         {
             model: "gpt-3.5-turbo",
             messages: [
-                {role: "system", content: "You are a helpful assisttant."},
+                {role: "system", content: tone},
                 {role: "user", content: prompt}
-            ]
+            ],
+            temperature
         },
         {
             headers: {
