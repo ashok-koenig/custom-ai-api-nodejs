@@ -1,0 +1,5 @@
+node_modules/
+package-lock.json
+uploads/
+.env
+testjune13-462806-0c887fa367de.json
