@@ -18,7 +18,7 @@ app.post("/analyze-sentiment", (req, res)=>{
     }
     
     client.analyzeSentiment({document: {content: text, type:'PLAIN_TEXT'}}).then((response)=>{
-        console.log(response)
+        // console.log(response)
          res.json({
             score: response[0].documentSentiment.score,
             magnitude: response[0].documentSentiment.magnitude
@@ -37,11 +37,30 @@ app.post("/analyze-entity", (req, res)=>{
     }
     
     client.analyzeEntities({document: {content: text, type:'PLAIN_TEXT'}}).then((response)=>{
-        console.log(response)
+        // console.log(response)
          res.json({entities: response[0].entities.map(entity =>({
             name: entity.name,
             type: entity.type,
             salience: entity.salience
+         }))})
+    }).catch((error)=>{
+        console.log("Error: ", error.message)
+        res.json({error: "Failed to analyze the text."})
+    })
+   
+})
+
+app.post("/analyze-syntax", (req, res)=>{
+    const text = req.body.text
+     if(!text){
+        return res.status(400).json({error: "Text is required"})
+    }
+    
+    client.analyzeSyntax({document: {content: text, type:'PLAIN_TEXT'}}).then((response)=>{
+        // console.log(response)
+         res.json({syntax: response[0].tokens.map(token =>({
+            text: token.text.content,
+            partOfSpeech: token.partOfSpeech.tag
          }))})
     }).catch((error)=>{
         console.log("Error: ", error.message)
