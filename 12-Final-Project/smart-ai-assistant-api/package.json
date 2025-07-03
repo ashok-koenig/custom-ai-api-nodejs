@@ -1,0 +1,24 @@
+{
+  "name": "smart-ai-assistant-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@google-cloud/language": "^7.1.0",
+    "@google-cloud/vision": "^5.2.0",
+    "axios": "^1.10.0",
+    "cors": "^2.8.5",
+    "dotenv": "^17.0.1",
+    "express": "^5.1.0",
+    "express-rate-limit": "^7.5.1",
+    "express-validator": "^7.2.1",
+    "multer": "^2.0.1"
+  }
+}
